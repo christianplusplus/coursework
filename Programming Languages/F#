@@ -1,0 +1,6 @@
+let i = 1
+let n = 50
+let N = [i..n]
+let rec H n = if n = 0 then 0 else n - (H (H (H (n - 1))))
+let hseq = List.map H N
+printfn "%A" hseq
