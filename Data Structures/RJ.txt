@@ -1,0 +1,17 @@
+Juliet  Tybalt 2
+Juliet Capulet 1
+Juliet Romeo 1
+Juliet Nurse 3
+Juliet FriarLaurence 2
+Tybalt Capulet 1
+Capulet Escalus 2
+Capulet Paris 1
+FriarLaurence Romeo 2
+Romeo Benvolio 1
+Romeo Montague 1
+Romeo Mercutio 1
+Benvolio Montague 1
+Montague Escalus 1
+Escalus Paris 2
+Escalus Mercutio 2
+Mercutio Paris 2
