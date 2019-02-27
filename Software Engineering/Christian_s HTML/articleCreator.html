@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="keywords" content="gamingwiki index homepage signin signup " />
+<meta name="description" content="Gaming wiki homepage" />
+<title> GamingWiki</title>
+<link rel="stylesheet" type="text/css" href="articleCreator.css" />
+<script src="articleCreator.js" type="text/javascript"></script>
+</head>
+<body>
+	<header>
+		<a href='https://webdev.cs.uwosh.edu/students/guang16/gamingwikiindex/home.php'>
+			<img src='gamingwiki.png' alt='Gamingwiki Logo' width = '100' height = '100'/>
+		</a>
+    
+		<a href='https://www.wikipedia.org/'>
+			<img src='wikipedia.png' alt='wikipedia Logo'  width = '100' height = '100'/>
+		</a>
+	</header>
+	<nav>
+   		<form action='search.php' method='post'>
+			<input type='text' name='search' id='search' class='inNav' col='2' placeholder='          Custom Search'/>
+		</form>
+   		<form action='signin.js' method='post'>
+			<input type='submit' value='SIGNIN' class='inNav' id='signin'></button>
+		</form>
+    	<form action='creataccount.html'>
+			<input type='submit' value='SIGNUP' id='signup' class='inNav'></input>
+		</form>   
+	</nav>
+	<div id="main">
+	<table>
+	<tr>
+		<td>
+			<textarea cols = "115" rows = "40" id="textbox"></textarea>
+			<input type="button" id="previewButton" onclick="insertPreview()" value="Insert Preview">
+			<input type="button" id="submitButton" value="Submit Article">
+		</td>
+		<td>
+		<div id = "preview">
+				
+		</div>
+		</td>
+	</tr>
+	</table>
+	</div>
+<!--	<div id="footer">-->
+
+	</div>
+</body>
+</html>
