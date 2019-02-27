@@ -1,0 +1,140 @@
+@charset "utf-8";
+@import url("OptimusPrinceps/stylesheet.css");
+@import url("OptimusPrincepsSemiBold/stylesheet.css");
+
+
+#header {
+	background-color: #1F1D53;
+	height: 150px;
+}
+#wrapper {
+
+}
+#headerText {
+	text-align: center;
+	font-size: 50px;
+	font-family: OptimusPrincepsSemiBold;
+	/* [disabled]font-style: italic; */
+	color: #D4D296;
+	padding-top: 50px;
+	padding-right: 191px;
+}
+#navhead {
+	color: #0D5329;
+	text-align: center;
+	text-decoration: underline;
+	font-family: OptimusPrincepsSemiBold;
+}
+#content #nav ul {
+	font-size: large;
+	list-style-type: none;
+	font-family: OptimusPrincepsSemiBold;
+	margin-left: -13px;
+}
+#nav ul li {
+	margin-top: 10px;
+}
+#content {
+	min-height: 700px;
+
+}#nav {
+	background-color: #929ED7;
+	height: 500px;
+	width: 200px;
+	float: left;
+	margin-right: 5px;
+}
+#banner {
+	width: 300px;
+	float: right;
+	height: 500px;
+	margin-left: 5px;
+}
+
+body {
+	background-image: url("images/artorias(wallpaper).jpg");
+	background-repeat: no-repeat;
+    background-size: cover;
+	background-attachment: fixed;
+}
+#maincontent {
+	color: #FFFFFF;
+	text-align: center;
+	margin-left: 205px;
+	margin-right: 300px;
+}
+#content #maincontent p {
+	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: large;
+	text-align: left;
+}
+
+#content #maincontent h1 {
+	text-decoration: underline;
+}
+#footer {
+	height: 50px;
+	margin-bottom: 0px;
+	color: #FFFFFF;
+}
+#gameBox {
+	width: 200px;
+	float: left;
+	margin-left: 25px;
+	margin-right: 30px;
+}
+.classbox {
+	margin-left: 25px;
+	margin-right: 30px;
+	float: left;
+	width: 200px;
+	height: 400px;
+}
+
+#wrapper #header img {
+	width: 211px;
+	float: left;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+.subnav {
+	color: #7A1111;
+	font-size: small;
+	padding-left: 20px;
+}
+a {
+	text-decoration: none;
+	color: inherit;
+}
+.subtitle {
+	text-decoration: underline;
+	font-size: large;
+}
+#content #maincontent table {
+	border-style: solid;
+	border-width: thin;
+	margin-left: auto;
+	margin-right: auto;
+}
+.classP {
+	height: 400px;
+}
+iframe {
+	margin-left: auto;
+	margin-right: auto;
+}
+#content #maincontent a {
+	font-size: x-large;
+	color: #B1B7FB;
+	text-decoration: underline;
+}
+#footer a #siteMap {
+	color: #B1B7FB;
+	text-decoration: underline;
+}
+#maincontent p img {
+
+}
+#maincontent p img {
+	float: right;
+}
