@@ -1,0 +1,99 @@
+/**
+ * Trevor Abel
+ * Christian Wendlandt 
+ * MultiLarc CU
+ */
+
+CHIP CU {
+
+    IN opcode[4], done;
+    OUT PCWrite, MSrc, MWrite, IRWrite, MDRWrite, LW, LI, RFwd[3], RFWrite, SorL, RD1Write, RD2Write, ALU1[2], ALU2[2], Sub, Nor, BN, BE, ALUOutWrite, JAL, Reset;
+    
+    PARTS:
+    
+    //choose Next state
+    //use opCode to select operation for state 1
+    Mux16Way16(
+        a[1]=true, //2
+        b[2]=true, //4
+        c[4]=true, c[0]=1, //17
+        //gap in opcodes
+        g[2]=true, g[0]=true, //5
+        h[2]=true, h[1]=true, //6
+        i[2]=true, i[1]=true, i[0]=true, //7
+        j[3]=true, //8 
+        k[3]=true, k[0]=true, //9 
+        l[3]=true, l[1]=true, //10 
+        m[3]=true, m[1]=true, m[0]=true, //11 
+        n[3]=true, n[2]=true, n[1]=true, //14 
+        o[4]=true, //16 
+        sel=opcode, 
+        out[0]=op0, 
+        out[1]=op1, 
+        out[2]=op2, 
+        out[3]=op3,
+        out[4]=op4
+    ); 
+    //And with s1
+    And(a=op0, b=s1, out=s1Andop0);
+    And(a=op1, b=s1, out=s1Andop1);
+    And(a=op2, b=s1, out=s1Andop2);
+    And(a=op3, b=s1, out=s1Andop3);
+    And(a=op4, b=s1, out=s1Andop4);
+    
+    //wait for mult to finish
+    And(a=s18, b=done, out=s18Anddone);
+    
+    Or16Way(a=s0, b=s2, c=s4, d=s5, e=s6, f=s12, g=s14, h=s1Andop0, i=s18Anddone, out=ns0); //ns0
+    Or16Way(a=s2, b=s4, c=s5, d=s6, e=s14, f=s1Andop1, g=s17, h=s18Anddone, out=ns1); //ns1
+    Or16Way(a=s11, b=s12, c=s14, d=s1Andop2, out=ns2); //ns2
+    Or16Way(a=s11, b=s12, c=s14, d=s1Andop3, out=ns3); //ns3 
+    Or16Way(a=s1Andop4, b=s17, c=s18Anddone, out=ns4);
+    
+    //Continue for halt
+    And(a=opcode[0], b=opcode[1], out=and0);
+    And(a=opcode[2], b=opcode[3], out=and1);
+    And(a=and0, b=and1, out=opCodeAnd);
+    Not(in=opCodeAnd, out=continue);
+    
+    //State Register
+    Register(in[0]=ns0, in[1]=ns1, in[2]=ns2, in[3]=ns3, in[4]=ns4, load=continue, out[0..4]=curState);
+    
+    //check states
+    Mux32Way(a=true, sel=curState, out=s0, out=IRWrite, out=ALU2[0]);
+    Mux32Way(b=true, sel=curState, out=s1, out=SorL, out=RD1Write, out=RD2Write);
+    Mux32Way(c=true, sel=curState, out=s2);
+    Mux32Way(d=true, sel=curState, out=s3);
+    Mux32Way(e=true, sel=curState, out=s4);
+    Mux32Way(f=true, sel=curState, out=s5);
+    Mux32Way(g=true, sel=curState, out=s6);
+    Mux32Way(h=true, sel=curState, out=s7, out=LI);
+    Mux32Way(i=true, sel=curState, out=s8);
+    Mux32Way(j=true, sel=curState, out=s9, out=BE);
+    Mux32Way(k=true, sel=curState, out=s10, out=BN);
+    Mux32Way(l=true, sel=curState, out=s11, out=LW);
+    Mux32Way(m=true, sel=curState, out=s12, out=MDRWrite);
+    Mux32Way(n=true, sel=curState, out=s13);
+    Mux32Way(o=true, sel=curState, out=s14);
+    Mux32Way(p=true, sel=curState, out=s15, out=MWrite);
+    Mux32Way(q=true, sel=curState, out=s16, out=JAL);
+	
+	//Booth Mult states
+	Mux32Way(r=true, sel=curState, out=s17, out=reset);
+	Mux32Way(s=true, sel=curState, out=s18);
+	Mux32Way(t=true, sel=curState, out=s19, out=RFwd[2]);
+    
+    //Selecting the output
+    Or16Way(a=s0, b=s9, c=s10, d=s16, out=PCWrite); 
+    Or(a=s12, b=s15, out=MSrc); 
+    Or(a=s3, b=s16, out=RFwd[0]);
+    Or(a=s3, b=s13, out=RFwd[1]); 
+    Or16Way(a=s3, b=s7, c=s8, d=s13, e=s16, f=s19, out=RFWrite);  
+    Or(a=s9, b=s10, out=ALU1[0]); 
+    Or16Way(a=s2, b=s4, c=s5, d=s6, e=s11, f=s14, out=ALU1[1]); 
+    Or16Way(a=s1, b=s11, c=s14, out=ALU2[1]); 
+    Or16Way(a=s4, b=s6, out=Sub); 
+    Or(a=s5, b=s6, out=Nor); 
+    Or16Way(a=s1, b=s2, c=s4, d=s5, e=s6, h=s11, i=s14, out=ALUOutWrite);
+    
+}
